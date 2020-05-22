@@ -1,0 +1,29 @@
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "denmap"
+  namespace: "default"
+  labels:
+    app: "denmap"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "denmap"
+  template:
+    metadata:
+      labels:
+        app: "denmap"
+    spec:
+      containers:
+      - name: "denmap-1"
+        image: "gcr.io/blistering-fire-8982/github.com/utkugun/denmap:$SHORT_SHA"
+---
+apiVersion: "autoscaling/v2beta1"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "denmap-hpa-3tde"
+  namespace: "default"
+  labels:
+    app: "denmap"
+spec:
