@@ -1,3 +1,19 @@
-<agm-map [latitude]="lat" [longitude]="lng">
-  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-</agm-map>
+
+<div     *ngIf="auth.user | async as user; else showLogin">
+
+  <h1>Hello {{ user.displayName }}!</h1>
+  <h1>Hello {{ user.uid }}!</h1>
+  <h1>Hello {{ user.email }}!</h1>
+  <button (click)="logout()">Logout</button>
+  <agm-map  [latitude]="lat" [longitude]="lng">
+    <agm-marker
+    [latitude]="lat"
+    [longitude]="lng"></agm-marker>
+  </agm-map>
+
+</div>
+<ng-template #showLogin>
+  <p>Please login.</p>
+  <button (click)="login()">Login with Google</button>
+</ng-template>
+
